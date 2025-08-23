@@ -1,9 +1,9 @@
+import { Movie } from "@/lib/app.types";
 
-
-export default function MovieCard(){
+export default function MovieCard({movieData}: {movieData: Movie}){
 	return (
-		<div className="w-full min-w-70 h-84 border">
-			aaa
+		<div className="w-full h-84 border">
+			{movieData.name}
 		</div>
 	)
 }

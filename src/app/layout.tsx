@@ -1,8 +1,7 @@
+import { Navigation } from "@/components/elements/navigation/navigation";
 import type { Metadata } from "next";
 import { Montserrat, Roboto } from "next/font/google";
 import "./globals.css";
-import { NavigationMenu, NavigationMenuItem } from "@/components/ui/navigation-menu";
-import { Navigation } from "@/components/elements/navigation/navigation";
 
 
 const montserrat = Montserrat({
@@ -28,20 +27,18 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body
-				className={`${montserrat.variable} ${roboto.variable} antialiased flex flex-col dark`}
-			>
+			<body className={`${montserrat.variable} ${roboto.variable} antialiased flex flex-col dark`}>
 
-					<Navigation/>
-				<main className="flex flex-col items-center sm:items-start p-6">
-						
+				<Navigation />
+
+				<main className="flex flex-col items-center sm:items-start p-6 max-w-screen">
 					{children}
 				</main>
-
 
 				<footer className="flex font-mont text-mauve-11 border-t items-center justify-center h-20">
 					2023 © Todos os direitos reservados a Cubos Movies
 				</footer>
+
 			</body>
 		</html>
 	);

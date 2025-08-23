@@ -18,6 +18,7 @@ export function Navigation() {
 				<h1 className="text-2xl">Movies</h1>
 			</NavigationMenuItem>
 
+
 			<NavigationMenuItem>
 				<Button variant={"secondary"} onClick={() => toggleDarkTheme()}>
 					<Icon icon="lets-icons:sun" width="24" height="24"></Icon>
