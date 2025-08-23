@@ -1,8 +1,8 @@
-import { Navigation } from "@/components/elements/navigation/navigation";
+import { Navigation } from "@/components/elements/navigation";
 import type { Metadata } from "next";
 import { Montserrat, Roboto } from "next/font/google";
 import "./globals.css";
-
+import Image from "next/image"
 
 const montserrat = Montserrat({
 	variable: "--font-montserrat",
@@ -27,11 +27,15 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${montserrat.variable} ${roboto.variable} antialiased flex flex-col dark`}>
+			<body className={`${montserrat.variable} ${roboto.variable} antialiased flex flex-col dark `}>
+
+				<div className="flex h-136 w-screen absolute bg-linear-to-t from-background to-black">
+					<Image fill src="/Imagem PNG.png" alt="Theater" className="opacity-20 object-cover" />
+				</div>
 
 				<Navigation />
 
-				<main className="flex flex-col items-center sm:items-start p-6 max-w-screen">
+				<main className="flex flex-col items-center sm:items-start p-6 max-w-screen ">
 					{children}
 				</main>
 

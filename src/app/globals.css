@@ -34,6 +34,7 @@
 
   --color-mauve-12: oklch(0.1797 0.0043 308.19);
   --color-mauve-11: oklch(0.7691 0.0144 299.72);
+  --color-mauve-1: oklch(0.1797 0.0043 308.19);
 
   --color-mauve-10: oklch(0.7691 0.0144 299.72);
   --color-mauve-9: oklch(0.7691 0.0144 299.72);
@@ -44,25 +45,24 @@
   --color-mauve-4: oklch(0.5955 0.1768 306.45);
   --color-mauve-3: oklch(0.5955 0.1768 306.45);
   --color-mauve-2: oklch(0.5955 0.1768 306.45);
-  --color-mauve-1: oklch(0.5955 0.1768 306.45);
+  
   --color-mauve: --var(--color-mauve-9);
 
-  --color-mauve-alpha-11: oklch(0.7691 0.0144 299.72 / 98.04%);
-  --color-mauve-alpha-12:oklch(0.7691 0.0144 299.72 / 98.04%);
-  --color-mauve-alpha-10: oklch(0.7691 0.0144 299.72 / 98.04%);
-  --color-mauve-alpha-9: oklch(0.7691 0.0144 299.72 / 98.04%);
-  --color-mauve-alpha-8: oklch(0.7691 0.0144 299.72 / 98.04%);
-  --color-mauve-alpha-7: oklch(0.7691 0.0144 299.72 / 98.04%);
-  --color-mauve-alpha-6: oklch(0.7691 0.0144 299.72 / 98.04%);
-  --color-mauve-alpha-5: oklch(0.7691 0.0144 299.72 / 98.04%);
-  --color-mauve-alpha-4: oklch(0.7691 0.0144 299.72 / 98.04%);
+  --color-mauve-alpha-11: oklch(0.5955 0.1768 306.45);
+  --color-mauve-alpha-12:var(--color-mauve-alpha-11);
+  --color-mauve-alpha-10: var(--color-mauve-alpha-11);
+  --color-mauve-alpha-9: var(--color-mauve-alpha-11);
+  --color-mauve-alpha-8: var(--color-mauve-alpha-11);
+  --color-mauve-alpha-7: var(--color-mauve-alpha-11);
+  --color-mauve-alpha-6: var(--color-mauve-alpha-11);
+  --color-mauve-alpha-5: var(--color-mauve-alpha-11);
+  --color-mauve-alpha-4: var(--color-mauve-alpha-11);
+  --color-mauve-alpha: var(--color-mauve-alpha-11);
+  --color-mauve-alpha-2: var(--color-mauve-alpha-11);
 
   --color-mauve-alpha-3: oklch(0.9419 0.0188 289.32 / 7.84%);
+  --color-mauve-alpha-1: oklch(0.1797 0.0043 308.19);
   
-  --color-mauve-alpha-2: ''
-  --color-mauve-alpha-1: ''
-  --color-mauve-alpha: ''
-
   --font-sans: var(--font-roboto);
   --font-mont: var(--font-montserrat);
 
@@ -105,7 +105,7 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.1797 0.0043 308.19);
+  --background: var(--color-mauve-1);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -153,7 +153,7 @@
   --color-purple-1: oklch(0.1913 0.0225 315.59);
   --color-purple: oklch(0.5556 0.1829 305.86);
 
-  --background: oklch(0.1797 0.0043 308.19);
+  --background: var(--color-mauve-1);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);

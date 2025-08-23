@@ -1,4 +1,4 @@
-import MovieCard from "@/components/elements/movie-card/movie-card";
+import MovieCard from "@/components/elements/movie-card";
 
 const movieMockList = [
 	{
@@ -39,7 +39,7 @@ export default function Home() {
 
 			<div className="flex flex-col gap-4">
 
-				<div className="w-full flex items-center justify-center p-6 border-dashed rounded-xl border-2">
+				<div className=" relative w-full flex items-center justify-center p-6 border-dashed rounded-xl border-2">
 					WIP: filtros
 				</div>
 
