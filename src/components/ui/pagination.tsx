@@ -1,9 +1,8 @@
 import * as React from "react"
 import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
   MoreHorizontalIcon,
 } from "lucide-react"
+import { Icon } from "@iconify/react"
 
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
@@ -55,7 +54,7 @@ function PaginationLink({
       data-active={isActive}
       className={cn(
         buttonVariants({
-          variant: isActive ? "outline" : "ghost",
+          variant: isActive ? "ghost" : "default",
           size,
         }),
         className
@@ -71,13 +70,12 @@ function PaginationPrevious({
 }: React.ComponentProps<typeof PaginationLink>) {
   return (
     <PaginationLink
-      aria-label="Go to previous page"
+      aria-label="Ir para página anterior"
       size="default"
-      className={cn("gap-1 px-2.5 sm:pl-2.5", className)}
+      className={cn("px-4", className)}
       {...props}
     >
-      <ChevronLeftIcon />
-      <span className="hidden sm:block">Previous</span>
+	  <Icon icon="lets-icons:expand-left"></Icon>
     </PaginationLink>
   )
 }
@@ -88,13 +86,13 @@ function PaginationNext({
 }: React.ComponentProps<typeof PaginationLink>) {
   return (
     <PaginationLink
-      aria-label="Go to next page"
+      aria-label="Ir para próxima página"
       size="default"
-      className={cn("gap-1 px-2.5 sm:pr-2.5", className)}
+      className={cn("px-4", className)}
       {...props}
     >
-      <span className="hidden sm:block">Next</span>
-      <ChevronRightIcon />
+	  <Icon icon="lets-icons:expand-right"></Icon>
+
     </PaginationLink>
   )
 }
@@ -111,7 +109,7 @@ function PaginationEllipsis({
       {...props}
     >
       <MoreHorizontalIcon className="size-4" />
-      <span className="sr-only">More pages</span>
+      <span className="sr-only">Mais páginas</span>
     </span>
   )
 }

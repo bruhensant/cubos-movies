@@ -21,7 +21,7 @@ export function Navigation() {
 
 			<NavigationMenuItem>
 				<Button variant={"secondary"} onClick={() => toggleDarkTheme()}>
-					<Icon icon="lets-icons:sun" width="24" height="24"></Icon>
+					<Icon icon="lets-icons:sun"></Icon>
 				</Button>
 			</NavigationMenuItem>
 		</NavigationMenu>

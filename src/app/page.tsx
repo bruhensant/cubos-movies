@@ -37,17 +37,14 @@ const movieMockList = [
 
 export default function Home() {
 	return (
-		<div className="font-sans flex flex-col min-h-screen w-full">
+		<div className="font-sans flex flex-col gap-8 min-h-screen w-full">
 
-			<div className="flex flex-col gap-4">
+			<div className="flex flex-col gap-2">
 
-				<SearchBox>
-					
-				</SearchBox>
-
+				<SearchBox></SearchBox>
 
 				<div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 rounded-md p-6 
-			bg-mauve-alpha-3 backdrop-blur-xs">
+					bg-mauve-alpha-3 backdrop-blur-xs">
 
 					{movieMockList.map((movie) => (
 						<MovieCard key={movie.name} movieData={movie} />
@@ -55,9 +52,7 @@ export default function Home() {
 				</div>
 			</div>
 
-			<Paginator>
-				
-			</Paginator>
+			<Paginator></Paginator>
 
 		</div>
 	);
