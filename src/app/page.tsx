@@ -1,4 +1,6 @@
 import MovieCard from "@/components/elements/movie-card";
+import { Paginator } from "@/components/elements/paginator";
+import { SearchBox } from "@/components/elements/search-box";
 
 const movieMockList = [
 	{
@@ -39,9 +41,9 @@ export default function Home() {
 
 			<div className="flex flex-col gap-4">
 
-				<div className=" relative w-full flex items-center justify-center p-6 border-dashed rounded-xl border-2">
-					WIP: filtros
-				</div>
+				<SearchBox>
+					
+				</SearchBox>
 
 
 				<div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 rounded-md p-6 
@@ -53,9 +55,9 @@ export default function Home() {
 				</div>
 			</div>
 
-			<div className="w-full mt-auto flex items-center justify-center p-6 border-dashed rounded-xl border-2">
-				paginador
-			</div>
+			<Paginator>
+				
+			</Paginator>
 
 		</div>
 	);
