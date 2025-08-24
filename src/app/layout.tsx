@@ -37,7 +37,7 @@ export default function RootLayout({
 
 				<Navigation />
 
-				<main className="flex flex-col items-center sm:items-start p-6 max-w-screen 2xl:mx-50">
+				<main className="flex flex-col items-center h-screen sm:items-start p-6 max-w-screen 2xl:mx-50">
 					{children}
 				</main>
 

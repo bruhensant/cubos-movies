@@ -30,7 +30,6 @@ export default function Home() {
 					grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 
 					xl:grid-cols-5 2xl:grid-cols-5 3xl:grid-cols-5 gap-6 rounded-md p-6
 					">
-
 					{
 						movies.map((movie) => (
 							<MovieCard key={movie.title} movieData={movie} />
@@ -41,10 +40,6 @@ export default function Home() {
 			</div>
 
 			<Paginator></Paginator>
-
-			<Button onClick={() => getEntites(Endpoint.WEEKLY_TRENDING_MOVIES)}>
-				Fetch Movies
-			</Button>
 
 		</div>
 	);

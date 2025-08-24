@@ -42,10 +42,11 @@
   --color-mauve-7: oklch(0.7691 0.0144 299.72);
   --color-mauve-5: oklch(0.7691 0.0144 299.72);
   --color-mauve-4: oklch(0.5955 0.1768 306.45);
-  --color-mauve-3: oklch(0.5955 0.1768 306.45);
   
   --color-mauve-6: oklch(0.3499 0.011 308.11);
+  --color-mauve-3: oklch(0.2543 0.0057 301.13);
   --color-mauve-2: oklch(0.2154 0.0041 308.25);
+  --color-custom-mauve-2: oklch(0.2543 0.0057 301.13 / 74.9%);
   --color-mauve: --var(--color-mauve-9);
 
   --color-mauve-alpha-11: oklch(0.5955 0.1768 306.45);
