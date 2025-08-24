@@ -1,41 +1,24 @@
+'use client'
+
 import MovieCard from "@/components/elements/movie-card";
 import { Paginator } from "@/components/elements/paginator";
 import { SearchBox } from "@/components/elements/search-box";
-
-const movieMockList = [
-	{
-		name: "Movie 1",
-	},
-	{
-		name: "Movie 2",
-	},
-	{
-		name: "Movie 3",
-	},
-	{
-		name: "Movie 4",
-	},
-	{
-		name: "Movie 5",
-	},
-	{
-		name: "Movie 6",
-	},
-	{
-		name: "Movie 7",
-	},
-	{
-		name: "Movie 8",
-	},
-	{
-		name: "Movie 9",
-	},
-	{
-		name: "Movie 10",
-	},
-];
+import { Button } from "@/components/ui/button";
+import { Endpoint, Movie } from "@/lib/app.types";
+import { getEntites } from "@/lib/tmdb.service";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+
+	const [movies, setMovies] = useState<Movie[]>([]);
+
+	useEffect(() => {
+		getEntites<Movie>(Endpoint.WEEKLY_TRENDING_MOVIES).
+			then(data => {
+				setMovies(data);
+			});
+	}, []);
+
 	return (
 		<div className="font-sans flex flex-col gap-8 min-h-screen w-full">
 
@@ -43,16 +26,25 @@ export default function Home() {
 
 				<SearchBox></SearchBox>
 
-				<div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 rounded-md p-6
-					bg-mauve-alpha-3 backdrop-blur-xs">
+				<div className="w-full grid bg-mauve-alpha-3 backdrop-blur-xs
+					grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 
+					xl:grid-cols-5 2xl:grid-cols-5 3xl:grid-cols-5 gap-6 rounded-md p-6
+					">
 
-					{movieMockList.map((movie) => (
-						<MovieCard key={movie.name} movieData={movie} />
-					))}
+					{
+						movies.map((movie) => (
+							<MovieCard key={movie.title} movieData={movie} />
+						))
+					}
+
 				</div>
 			</div>
 
 			<Paginator></Paginator>
+
+			<Button onClick={() => getEntites(Endpoint.WEEKLY_TRENDING_MOVIES)}>
+				Fetch Movies
+			</Button>
 
 		</div>
 	);
