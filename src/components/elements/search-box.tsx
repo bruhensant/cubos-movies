@@ -5,12 +5,12 @@ import { Button } from "../ui/button"
 import { Icon } from "@iconify/react"
 import { use, useEffect, useState } from "react"
 import { getEntites } from "@/lib/tmdb.service"
-import { Endpoint, Genre } from "@/lib/app.types"
+import { Endpoint, Genre, Movie } from "@/lib/app.types"
 import { Checkbox } from "../ui/checkbox"
 import { Label } from "../ui/label"
 
 
-export function SearchBox({ searchFn }: { searchFn: (query: string) => void }) {
+export function SearchBox({ searchFn, setMovies }: { searchFn: (query: string) => void, setMovies: (movies: Movie[]) => void }) {
 	const [filterContainerState, setFilterContainerState] = useState(false);
 	const [filterInputState, setFilterInputState] = useState('');
 	const [genreList, setGenreList] = useState<Genre[]>([]);
@@ -24,7 +24,9 @@ export function SearchBox({ searchFn }: { searchFn: (query: string) => void }) {
 	}, [filterContainerState])
 
 	function handleCompositeSearch(){
-		console.warn(`with_genres=${selectedGenreList.join(',')}`)
+		getEntites<{ results: Movie[] }>(Endpoint.MOVIE_DISCOVER, { with_genres: selectedGenreList.join(',') }).then((data) => {
+			setMovies(data.results);
+		});
 	}
 
 	return (

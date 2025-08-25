@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { Endpoint } from "./app.types";
 
 const TMDB_API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
@@ -45,14 +46,17 @@ function getEntitiesWithPagination<T>(endpoint: Endpoint, params?: { [key: strin
 		headers,
 	})
 		.then(res => res.json())
-		.then((data) => ({
-			results: data.results.splice(0,10) || [],
-			page: data.page || 1,
-			total_pages: data.total_pages || 1,
-			total_results: data.total_results || 0
-		}))
+		.then((data) => {
+			return {
+				results: data.results.splice(0,10) || [],
+				page: data.page || 1,
+				total_pages: data.total_pages || 1,
+				total_results: data.total_results || 0
+			}
+		})
 		.catch(err => {
 			console.error(err);
+			toast.error(err);
 			return {
 				results: [],
 				page: 1,
@@ -71,6 +75,7 @@ function getEntity<T>(endpoint: Endpoint, id: number): Promise<T> {
 		.then((data: T) => data)
 		.catch(err => {
 			console.error(err);
+			toast.error(err)
 			throw err;
 		});
 

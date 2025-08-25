@@ -21,7 +21,8 @@ export enum Endpoint {
 	WEEKLY_TRENDING_MOVIES = 'trending/movie/week',
 	MOVIE_DETAILS = 'movie',
 	SEARCH_MOVIES = 'search/movie',
-	MOVIE_GENRES = 'genre/movie/list'
+	MOVIE_GENRES = 'genre/movie/list',
+	MOVIE_DISCOVER = 'discover/movie'
 }
 
 // PaginationInfo - contains pagination metadata

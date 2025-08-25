@@ -189,6 +189,19 @@
 }
 
 @layer base {
+  html {
+    color-scheme: light dark;
+  }
+  
+  html:not(.dark):not(.light) {
+    @media (prefers-color-scheme: dark) {
+      color-scheme: dark;
+    }
+    @media (prefers-color-scheme: light) {
+      color-scheme: light;
+    }
+  }
+  
   * {
     @apply border-border outline-ring/50;
   }

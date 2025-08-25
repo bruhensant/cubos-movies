@@ -4,16 +4,29 @@ import { useEffect, useState } from "react"
 
 export type Theme = "dark" | "light" | "system"
 
-// useTheme hook para gerenciar o tema da aplicação
 export function useTheme() {
-	const [theme, setTheme] = useState<Theme>("system")
+	const [theme, setTheme] = useState<Theme>(() => {
+		if (typeof window === "undefined") return "system"
+		
+		try {
+			const savedTheme = localStorage.getItem("theme") as Theme
+			return savedTheme || "system"
+		} catch {
+			return "system"
+		}
+	})
 	const [mounted, setMounted] = useState(false)
 
 	useEffect(() => {
 		setMounted(true)
-		const savedTheme = localStorage.getItem("theme") as Theme
-		if (savedTheme) {
-			setTheme(savedTheme)
+		
+
+		try {
+			const savedTheme = localStorage.getItem("theme") as Theme
+			if (savedTheme && savedTheme !== theme) {
+				setTheme(savedTheme)
+			}
+		} catch {
 		}
 	}, [])
 
@@ -21,16 +34,26 @@ export function useTheme() {
 		if (!mounted) return
 
 		const root = document.documentElement
+		
 		root.classList.remove("light", "dark")
 
+		let effectiveTheme: "light" | "dark"
+		
 		if (theme === "system") {
-			const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
-			root.classList.add(systemTheme)
+			effectiveTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
 		} else {
-			root.classList.add(theme)
+			effectiveTheme = theme
 		}
 
-		localStorage.setItem("theme", theme)
+		root.classList.add(effectiveTheme)
+
+		try {
+			const currentSaved = localStorage.getItem("theme")
+			if (currentSaved !== theme) {
+				localStorage.setItem("theme", theme)
+			}
+		} catch {
+		}
 	}, [theme, mounted])
 
 	const toggleTheme = () => {
@@ -42,7 +65,11 @@ export function useTheme() {
 	}
 
 	const currentTheme = mounted ? theme : "system"
-	const isDark = mounted && (theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches))
+	
+	const isDark = mounted && (
+		theme === "dark" || 
+		(theme === "system" && typeof window !== "undefined" && window.matchMedia("(prefers-color-scheme: dark)").matches)
+	)
 
 	return {
 		theme: currentTheme,

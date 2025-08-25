@@ -4,6 +4,7 @@ import { Montserrat, Roboto } from "next/font/google";
 import "./globals.css";
 import Image from "next/image"
 import { url } from "inspector";
+import { Toaster } from "@/components/ui/sonner";
 
 const montserrat = Montserrat({
 	variable: "--font-montserrat",
@@ -26,20 +27,19 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 
 			<head>
 				<script
 					dangerouslySetInnerHTML={{
 						__html: `
-							(function() {
-								const theme = localStorage.getItem('theme') || 'system'
-								if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-									document.documentElement.classList.add('dark')
-								} else {
-									document.documentElement.classList.add('light')
-								}
-							})()
+							try {
+								const theme = localStorage.getItem('theme') || 'system';
+								const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+								document.documentElement.classList.toggle('dark', isDark);
+							} catch (e) {
+								// Fallback silencioso se localStorage não estiver disponível
+							}
 						`,
 					}}
 				/>
@@ -55,6 +55,7 @@ export default function RootLayout({
 				<main className="flex flex-col items-center sm:items-start p-0 sm:p-6 max-w-screen 2xl:mx-50 relative">
 					
 					{children}
+					<Toaster />
 				</main>
 
 				<footer className="flex gap-1 font-mont p-6 pointer-events-none text-mauve-11 text-center border-t items-center justify-center h-20 z-999">

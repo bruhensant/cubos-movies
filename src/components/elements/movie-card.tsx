@@ -24,7 +24,7 @@ export default function MovieCard({ movieData }: { movieData: Movie }) {
 							Avaliação
 						</span>
 						<span className="text-sm flex gap-1 items-center font-regular sm:font-bold">
-							{movieData?.vote_average.toFixed(2)}<span className="font-medium">/10</span>
+							{movieData?.vote_average?.toFixed(2)}<span className="font-medium">/10</span>
 
 							{movieData &&
 								<Progress value={movieData?.vote_average * 10} />

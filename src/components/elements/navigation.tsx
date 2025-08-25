@@ -25,8 +25,18 @@ export function Navigation() {
 
 
 			<NavigationMenuItem>
-				<Button variant={"secondary"} onClick={toggleTheme} disabled={!mounted}>
-					<Icon icon={isDark ? "lets-icons:sun" : "lets-icons:moon"}></Icon>
+				<Button 
+					variant={"secondary"} 
+					onClick={toggleTheme} 
+					disabled={!mounted}
+					className="min-w-10 min-h-10"
+				>
+					{mounted ? (
+						<Icon icon={isDark ? "lets-icons:sun" : "lets-icons:moon"} />
+					) : (
+						// Ícone padrão durante carregamento para evitar layout shift
+						<Icon icon="lets-icons:moon" className="opacity-50" />
+					)}
 				</Button>
 			</NavigationMenuItem>
 		</NavigationMenu >
