@@ -27,7 +27,8 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${montserrat.variable} ${roboto.variable} antialiased flex flex-col dark overflow-x-clip`}>
+			
+			<body className={`${montserrat.variable} ${roboto.variable} antialiased flex flex-col overflow-x-clip`}>
 
 				<Navigation />
 				<div className="flex">
@@ -40,8 +41,11 @@ export default function RootLayout({
 					{children}
 				</main>
 
-				<footer className="flex font-mont p-6 text-mauve-11 text-center border-t items-center justify-center h-20">
-					2023 © Todos os direitos reservados a Cubos Movies
+				<footer className="flex gap-1 font-mont p-6 text-mauve-11 text-center border-t items-center justify-center h-20 z-999">
+					2023 © Todos os direitos reservados a 
+					<span className="font-medium">
+					Cubos Movies
+					</span>
 				</footer>
 
 			</body>

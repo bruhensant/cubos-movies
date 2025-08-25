@@ -1,4 +1,4 @@
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "../ui/pagination";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "../ui/pagination";
 
 type PaginatorProps = {
 	currentPage: number;
@@ -13,76 +13,71 @@ export function Paginator({ currentPage, totalPages, onPageChange }: PaginatorPr
 	}
 	
 	const getVisiblePages = () => {
-		const delta = 2;
-		const range = [];
-		const rangeWithDots = [];
+		const maxVisiblePages = 5;
+		const pages = [];
 
-		for (let i = Math.max(2, currentPage - delta); i <= Math.min(totalPages - 1, currentPage + delta); i++) {
-			range.push(i);
+		if (totalPages <= maxVisiblePages) {
+			for (let i = 1; i <= totalPages; i++) {
+				pages.push(i);
+			}
+			return pages;
 		}
-
-		if (currentPage - delta > 2) {
-			rangeWithDots.push(1, '...');
-		} else {
-			rangeWithDots.push(1);
+		
+		let startPage = Math.max(1, currentPage - 2);
+		let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+		
+		if (endPage - startPage + 1 < maxVisiblePages) {
+			startPage = Math.max(1, endPage - maxVisiblePages + 1);
 		}
-
-		rangeWithDots.push(...range);
-
-		if (currentPage + delta < totalPages - 1) {
-			rangeWithDots.push('...', totalPages);
-		} else if (totalPages > 1) {
-			rangeWithDots.push(totalPages);
+		
+		for (let i = startPage; i <= endPage; i++) {
+			pages.push(i);
 		}
-
-		return rangeWithDots.filter((item, index, arr) => arr.indexOf(item) === index);
+		
+		return pages;
 	};
 
 	const visiblePages = getVisiblePages();
 
 	return (
-		<Pagination>
+		<Pagination className="mt-auto">
 			<PaginationContent>
 				<PaginationItem>
-					<PaginationPrevious 
+					<PaginationPrevious
+						isActive={currentPage === 1}
 						onClick={(e) => {
 							e.preventDefault();
 							if (currentPage > 1) {
 								onPageChange(currentPage - 1);
 							}
 						}}
-						className={currentPage <= 1 ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
 					/>
 				</PaginationItem>
 
 				{visiblePages.map((page, index) => (
 					<PaginationItem key={index}>
-						{page === '...' ? (
-							<PaginationEllipsis />
-						) : (
-							<PaginationLink 
-								onClick={(e) => {
-									e.preventDefault();
-									onPageChange(page as number);
-								}}
-								isActive={page === currentPage}
-								className="cursor-pointer"
-							>
-								{page}
-							</PaginationLink>
-						)}
+						<PaginationLink 
+							onClick={(e) => {
+								e.preventDefault();
+								onPageChange(page);
+							}}
+							isActive={page === currentPage}
+						>
+							{page}
+						</PaginationLink>
 					</PaginationItem>
 				))}
 
 				<PaginationItem>
-					<PaginationNext 
+					<PaginationNext
+						isActive={currentPage === totalPages}
 						onClick={(e) => {
 							e.preventDefault();
 							if (currentPage < totalPages) {
 								onPageChange(currentPage + 1);
 							}
 						}}
-						className={currentPage >= totalPages ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+					
 					/>
 				</PaginationItem>
 

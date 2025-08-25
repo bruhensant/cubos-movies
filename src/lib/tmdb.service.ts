@@ -8,9 +8,6 @@ const headers = {
 	Authorization: `Bearer ${TMDB_API_KEY}`,
 };
 
-/**
- * Busca entidades da API TMDB com paginação
- */
 function getEntites<T>(endpoint: Endpoint, params?: { [key: string]: any }): Promise<T[]> {
 
 	const definedParams = {
@@ -31,9 +28,6 @@ function getEntites<T>(endpoint: Endpoint, params?: { [key: string]: any }): Pro
 		});
 };
 
-/**
- * Busca entidades da API TMDB com informações completas de paginação
- */
 function getEntitiesWithPagination<T>(endpoint: Endpoint, params?: { [key: string]: any }): Promise<{
 	results: T[];
 	page: number;

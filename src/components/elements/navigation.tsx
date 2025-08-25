@@ -2,15 +2,14 @@
 
 import { Button } from "@/components/ui/button"
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink } from "@/components/ui/navigation-menu"
+import { useTheme } from "@/hooks/use-theme"
 import { Icon } from "@iconify/react"
 import Image from "next/image"
 import Link from "next/link"
 
-function toggleDarkTheme() {
-	console.warn('dk')	// Logic to toggle dark theme
-}
-
 export function Navigation() {
+	const { toggleTheme, isDark, mounted } = useTheme()
+
 	return (
 
 		<NavigationMenu className="w-full flex justify-between items-center px-6 py-4 border-b backdrop-blur-sm">
@@ -26,8 +25,8 @@ export function Navigation() {
 
 
 			<NavigationMenuItem>
-				<Button variant={"secondary"} onClick={() => toggleDarkTheme()}>
-					<Icon icon="lets-icons:sun"></Icon>
+				<Button variant={"secondary"} onClick={toggleTheme} disabled={!mounted}>
+					<Icon icon={isDark ? "lets-icons:sun" : "lets-icons:moon"}></Icon>
 				</Button>
 			</NavigationMenuItem>
 		</NavigationMenu >

@@ -14,7 +14,7 @@ const buttonVariants = cva(
 				secondary: "bg-purple-alpha-2 text-primary hover:bg-purple-alpha-3 active:bg-purple-alpha-1 backdrop-blur-sm",
 				tertiary: "bg-transparent text-primary hover:bg-purple-10 active:bg-purple-8",
 				outline: "border border-purple-9 text-primary hover:bg-purple-10 active:bg-purple-8",
-				ghost: "bg-transparent hover:bg-purple-alpha-2 active:bg-purple-alpha-1",
+				disabled: "bg-mauve-3 text-primary cursor-not-allowed pointer-events-none",
 			},
 			size: {
 				default: "h-11 px-5 py-3",
