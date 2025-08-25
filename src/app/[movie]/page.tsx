@@ -19,22 +19,23 @@ export default function MovieDetails() {
 
 	const posterUrl = movieData?.poster_path ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}` : null;
 	const backdropUrl = movieData?.backdrop_path ? `https://image.tmdb.org/t/p/w500${movieData.backdrop_path}` : null;
+	const trailerVideo = movieData?.videos.results.filter(video => video.type === 'Trailer')[0].key;
 
 	return (
 		<div className="flex flex-col gap-6 w-full">
 
-			<div className="relative rounded-md h-fit w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 p-4 bg-custom-mauve-2">
+			<div className="relative rounded-md overflow-clip h-fit w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 p-4 bg-custom-mauve-2">
 
 				{
 					backdropUrl &&
-					<Image src={backdropUrl} alt="Movie Poster" fill objectFit="cover">
-					</Image>
+						<Image src={backdropUrl} alt="Movie Poster" fill className="object-cover brightness-30">
+						</Image>
 				}
 
 				{
 					posterUrl &&
 					<div className="h-140 sm:h-150 w-full relative">
-						<Image src={posterUrl} alt="Movie Poster" fill objectFit="cover" className="rounded-md bg-custom-mauve-2" />
+						<Image src={posterUrl} alt="Movie Backdrop" fill className="rounded-md bg-custom-mauve-2 object-cover" />
 					</div>
 				}
 
@@ -45,7 +46,6 @@ export default function MovieDetails() {
 					</div>
 
 					<span className="font-xs italic">{movieData?.tagline}</span>
-
 
 					<div className="flex flex-col gap-2 rounded-md p-4 bg-custom-mauve-2 backdrop-blur-xs">
 						<span className="font-mont font-bold uppercase text-mauve-11">
@@ -166,14 +166,12 @@ export default function MovieDetails() {
 
 			</div>
 
-			<div className="flex flex-col gap-4">
+			<div className="flex flex-col gap-4 h-fit">
 				<span className="text-2xl font-bold">
 					Trailer
 				</span>
 
-				<div className="rounded-sm border p-4 gap-4">
-					video
-				</div>
+				<iframe className="w-full aspect-video rounded-md" src={"https://www.youtube.com/embed/" + trailerVideo} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
 			</div>
 		</div>
 	);

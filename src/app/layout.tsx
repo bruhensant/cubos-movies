@@ -29,13 +29,14 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={`${montserrat.variable} ${roboto.variable} antialiased flex flex-col dark overflow-x-clip`}>
 
-				<div className="flex h-136 w-screen absolute bg-linear-to-t from-background to-black">
-					<Image priority fill src="/Imagem PNG.png" alt="Theater" className="opacity-20 object-cover" />
-				</div>
-
 				<Navigation />
+				<div className="flex">
+					<Image priority height={1000} width={2000} src="/Imagem PNG.png" alt="Theater" className="object-cover absolute" />
+				</div>
+				
 
-				<main className="flex flex-col items-center h-screen sm:items-start p-0 sm:p-6 max-w-screen 2xl:mx-50">
+				<main className="flex flex-col items-center sm:items-start p-0 sm:p-6 max-w-screen 2xl:mx-50 relative">
+					
 					{children}
 				</main>
 
