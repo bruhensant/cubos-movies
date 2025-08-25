@@ -38,7 +38,6 @@ export default function RootLayout({
 								const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 								document.documentElement.classList.toggle('dark', isDark);
 							} catch (e) {
-								// Fallback silencioso se localStorage não estiver disponível
 							}
 						`,
 					}}

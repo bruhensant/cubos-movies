@@ -34,7 +34,6 @@ export function Navigation() {
 					{mounted ? (
 						<Icon icon={isDark ? "lets-icons:sun" : "lets-icons:moon"} />
 					) : (
-						// Ícone padrão durante carregamento para evitar layout shift
 						<Icon icon="lets-icons:moon" className="opacity-50" />
 					)}
 				</Button>
