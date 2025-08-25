@@ -5,7 +5,8 @@ import { getEntity } from "@/lib/tmdb.service";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { formatDate } from "@/lib/utils";
+import { formatCurrencyToUSD, formatDate, formatHoursAndMinutes } from "@/lib/utils";
+import { Progress } from "@/components/ui/progress";
 
 export default function MovieDetails() {
 	const params = useParams();
@@ -18,9 +19,18 @@ export default function MovieDetails() {
 		})
 	}, []);
 
+	const movieStatusMap = {
+		Released: 'Lançado',
+		Rumored: 'Rumorado',
+		Planned: 'Planejado',
+		'In Production': 'Em Produção',
+		'Post Production': 'Pós Produção',
+		Canceled: 'Cancelado'
+	}
+
 	const posterUrl = movieData?.poster_path ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}` : null;
 	const backdropUrl = movieData?.backdrop_path ? `https://image.tmdb.org/t/p/w500${movieData.backdrop_path}` : null;
-	
+
 	const trailerVideo = movieData?.videos.results.filter(video => video.type === 'Trailer')[0]?.key || undefined;
 
 	return (
@@ -30,8 +40,8 @@ export default function MovieDetails() {
 
 				{
 					backdropUrl &&
-						<Image src={backdropUrl} alt="Movie Poster" fill className="object-cover brightness-30">
-						</Image>
+					<Image src={backdropUrl} alt="Movie Poster" fill className="object-cover brightness-30">
+					</Image>
 				}
 
 				{
@@ -94,12 +104,20 @@ export default function MovieDetails() {
 					</div>
 
 					<div className="flex flex-col gap-1 col-span-2 rounded-md h-fit">
+
 						<span className="uppercase font-mont font-semibold text-mauve-11">
 							Percentual
 						</span>
-						<span className="text-sm font-regular sm:font-bold">
-							{movieData?.vote_average}
+						<span className="text-sm flex gap-2 items-center font-regular sm:font-bold">
+							{movieData?.vote_average.toFixed(2)}
+
+							{movieData &&
+								<Progress value={movieData?.vote_average * 10} />
+							}
 						</span>
+
+
+
 					</div>
 
 					<div className="flex flex-col gap-1 col-span-3 rounded-md h-fit">
@@ -116,7 +134,7 @@ export default function MovieDetails() {
 							Duração
 						</span>
 						<span className="text-sm font-regular sm:font-bold">
-							{movieData?.runtime}
+							{formatHoursAndMinutes(movieData?.runtime)}
 						</span>
 					</div>
 
@@ -125,7 +143,7 @@ export default function MovieDetails() {
 							Situação
 						</span>
 						<span className="text-sm font-regular sm:font-bold">
-							{movieData?.status}
+							{movieData && movieData.status in movieStatusMap ? movieStatusMap[movieData.status as keyof typeof movieStatusMap] : movieData?.status}
 						</span>
 					</div>
 
@@ -133,8 +151,8 @@ export default function MovieDetails() {
 						<span className="uppercase font-mont font-semibold text-mauve-11">
 							Idioma
 						</span>
-						<span className="text-sm font-regular sm:font-bold">
-							{movieData?.original_language}
+						<span className="text-sm font-regular sm:font-bold capitalize">
+							{movieData?.original_language ? new Intl.DisplayNames(['pt-BR'], { type: 'language', style: 'long' }).of(movieData.original_language) : 'N/A'}
 						</span>
 					</div>
 
@@ -143,7 +161,7 @@ export default function MovieDetails() {
 							Orçamento
 						</span>
 						<span className="text-sm font-regular sm:font-bold">
-							{movieData?.budget}
+							{formatCurrencyToUSD(movieData?.budget)}
 						</span>
 					</div>
 
@@ -152,7 +170,7 @@ export default function MovieDetails() {
 							Receita
 						</span>
 						<span className="text-sm font-regular sm:font-bold">
-							{movieData?.revenue}
+							{formatCurrencyToUSD(movieData?.revenue)}
 						</span>
 					</div>
 
@@ -161,7 +179,7 @@ export default function MovieDetails() {
 							Lucro
 						</span>
 						<span className="text-sm font-regular sm:font-bold">
-							{String(Number(movieData?.revenue) - Number(movieData?.budget))}
+							{formatCurrencyToUSD(Number(movieData?.revenue) - Number(movieData?.budget))}
 						</span>
 					</div>
 				</div>
@@ -177,8 +195,8 @@ export default function MovieDetails() {
 					trailerVideo ? (
 						<iframe className="w-full aspect-video rounded-md" src={"https://www.youtube.com/embed/" + trailerVideo} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
 					) : (
-						<div className="w-full aspect-video border-dashed rounded-md flex items-center justify-center border bg-custom-mauve-2">
-							<p className="text-lg uppercase text-mauve-11">No trailer available yet.</p>
+						<div className="w-full aspect-video border-dashed rounded-md flex items-center justify-center border bg-background">
+							<p className="text-lg uppercase text-primary">Nenhum trailer disponível no seu idioma.</p>
 						</div>
 					)
 				}

@@ -10,11 +10,11 @@ const buttonVariants = cva(
 		variants: {
 			variant: {
 				default:
-					"bg-purple-9 text-primary hover:bg-purple-10 active:bg-purple-8",
+					"bg-purple-3 text-primary hover:bg-purple-3 active:bg-purple-3 dark:bg-purple-9 dark:hover:bg-purple-10 dark:active:bg-purple-8",
 				secondary: "bg-purple-alpha-2 text-primary hover:bg-purple-alpha-3 active:bg-purple-alpha-1 backdrop-blur-sm",
 				tertiary: "bg-transparent text-primary hover:bg-purple-10 active:bg-purple-8",
 				outline: "border border-purple-9 text-primary hover:bg-purple-10 active:bg-purple-8",
-				disabled: "bg-mauve-3 text-primary cursor-not-allowed pointer-events-none",
+				disabled: "bg-mauve-3 dark:text-primary text-primary-foreground cursor-not-allowed pointer-events-none",
 			},
 			size: {
 				default: "h-11 px-5 py-3",
