@@ -8,6 +8,9 @@ const headers = {
 	Authorization: `Bearer ${TMDB_API_KEY}`,
 };
 
+/**
+ * Busca entidades da API TMDB com paginação
+ */
 function getEntites<T>(endpoint: Endpoint, params?: { [key: string]: any }): Promise<T[]> {
 
 	const definedParams = {
@@ -28,6 +31,43 @@ function getEntites<T>(endpoint: Endpoint, params?: { [key: string]: any }): Pro
 		});
 };
 
+/**
+ * Busca entidades da API TMDB com informações completas de paginação
+ */
+function getEntitiesWithPagination<T>(endpoint: Endpoint, params?: { [key: string]: any }): Promise<{
+	results: T[];
+	page: number;
+	total_pages: number;
+	total_results: number;
+}> {
+	const definedParams = {
+		language: 'pt-BR',
+		append_to_response: 'videos',
+		...params
+	}
+
+	return fetch(`${API_URL}${endpoint}${`?${new URLSearchParams(definedParams)}`}`, {
+		method: 'GET',
+		headers,
+	})
+		.then(res => res.json())
+		.then((data) => ({
+			results: data.results.splice(0,10) || [],
+			page: data.page || 1,
+			total_pages: data.total_pages || 1,
+			total_results: data.total_results || 0
+		}))
+		.catch(err => {
+			console.error(err);
+			return {
+				results: [],
+				page: 1,
+				total_pages: 1,
+				total_results: 0
+			};
+		});
+};
+
 function getEntity<T>(endpoint: Endpoint, id: number): Promise<T> {
 	return fetch(`${API_URL}${endpoint}/${id}?language=pt-BR&append_to_response=videos`, {
 		method: 'GET',
@@ -42,4 +82,4 @@ function getEntity<T>(endpoint: Endpoint, id: number): Promise<T> {
 
 }
 
-export { getEntites, getEntity };
+export { getEntites, getEntitiesWithPagination, getEntity };

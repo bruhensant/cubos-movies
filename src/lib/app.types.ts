@@ -23,6 +23,13 @@ export enum Endpoint {
 	SEARCH_MOVIES = 'search/movie'
 }
 
+// PaginationInfo - contains pagination metadata
+export type PaginationInfo = {
+	page: number;
+	total_pages: number;
+	total_results: number;
+}
+
 // FullMovie type
 export type FullMovie = {
 	adult: boolean;

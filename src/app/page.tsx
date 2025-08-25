@@ -3,36 +3,52 @@
 import MovieCard from "@/components/elements/movie-card";
 import { Paginator } from "@/components/elements/paginator";
 import { SearchBox } from "@/components/elements/search-box";
-import { Endpoint, Movie } from "@/lib/app.types";
-import { getEntites } from "@/lib/tmdb.service";
+import { Endpoint, Movie, PaginationInfo } from "@/lib/app.types";
+import { getEntitiesWithPagination } from "@/lib/tmdb.service";
 import { useEffect, useState } from "react";
 
 export default function Home() {
 
 	const [movies, setMovies] = useState<Movie[]>([]);
+	const [paginationInfo, setPaginationInfo] = useState<PaginationInfo>({
+		page: 1,
+		total_pages: 1,
+		total_results: 0
+	});
 	const [lastSearch, setLastSearch] = useState({
 		page: 1,
-		endpoint: Endpoint.WEEKLY_TRENDING_MOVIES
+		endpoint: Endpoint.WEEKLY_TRENDING_MOVIES,
+		query: ''
 	});
 
-	console.warn('aa');
-
 	useEffect(() => {
-		getEntites<Movie>(Endpoint.WEEKLY_TRENDING_MOVIES).then(data => {
-				setMovies(data);
+		getEntitiesWithPagination<Movie>(Endpoint.WEEKLY_TRENDING_MOVIES).then(data => {
+			setMovies(data.results);
+			setPaginationInfo({
+				page: data.page,
+				total_pages: data.total_pages,
+				total_results: data.total_results
 			});
+		});
 
 	}, []);
 
 	function handleSearch(query: string) {
 		if(query === ''){
 			setLastSearch({
-			...lastSearch,
-			endpoint: Endpoint.WEEKLY_TRENDING_MOVIES
-		});
+				...lastSearch,
+				endpoint: Endpoint.WEEKLY_TRENDING_MOVIES,
+				query: '',
+				page: 1
+			});
 
-			getEntites<Movie>(Endpoint.WEEKLY_TRENDING_MOVIES).then(data => {
-				setMovies(data);
+			getEntitiesWithPagination<Movie>(Endpoint.WEEKLY_TRENDING_MOVIES).then(data => {
+				setMovies(data.results);
+				setPaginationInfo({
+					page: data.page,
+					total_pages: data.total_pages,
+					total_results: data.total_results
+				});
 			});
 
 			return;
@@ -40,17 +56,40 @@ export default function Home() {
 
 		setLastSearch({
 			...lastSearch,
-			endpoint: Endpoint.SEARCH_MOVIES
+			endpoint: Endpoint.SEARCH_MOVIES,
+			query: query,
+			page: 1
 		});
 
-		getEntites<Movie>(Endpoint.SEARCH_MOVIES, { query }).then(data => {
-			setMovies(data);
+		getEntitiesWithPagination<Movie>(Endpoint.SEARCH_MOVIES, { query }).then(data => {
+			setMovies(data.results);
+			setPaginationInfo({
+				page: data.page,
+				total_pages: data.total_pages,
+				total_results: data.total_results
+			});
 		});
 	}
 
-	function handlePageChange(page: number, endpoint?: Endpoint) {
-		getEntites<Movie>(endpoint || lastSearch.endpoint, { page }).then(data => {
-			setMovies(data);
+	function handlePageChange(page: number) {
+		const searchParams: any = { page };
+		
+		if (lastSearch.endpoint === Endpoint.SEARCH_MOVIES && lastSearch.query) {
+			searchParams.query = lastSearch.query;
+		}
+
+		setLastSearch({
+			...lastSearch,
+			page
+		});
+
+		getEntitiesWithPagination<Movie>(lastSearch.endpoint, searchParams).then(data => {
+			setMovies(data.results);
+			setPaginationInfo({
+				page: data.page,
+				total_pages: data.total_pages,
+				total_results: data.total_results
+			});
 		});
 	}
 
@@ -68,7 +107,7 @@ export default function Home() {
 						movies.length > 0 ? (
 
 							movies?.map((movie) => (
-								<MovieCard key={movie.title} movieData={movie} />
+								<MovieCard key={movie.id} movieData={movie} />
 							))
 						) : (
 							<p>Nenhum filme encontrado.</p>
@@ -78,7 +117,11 @@ export default function Home() {
 				</div>
 			</div>
 
-			<Paginator moveFn={handlePageChange} previousPage={lastSearch.page > 1 ? lastSearch.page - 1 : 1} nextPage={lastSearch.page + 1} />
+			<Paginator 
+				currentPage={paginationInfo.page}
+				totalPages={paginationInfo.total_pages}
+				onPageChange={handlePageChange}
+			/>
 
 		</div>
 	);

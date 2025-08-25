@@ -31,7 +31,7 @@ export default function RootLayout({
 
 				<Navigation />
 				<div className="flex">
-					<Image priority height={1000} width={2000} src="/Imagem PNG.png" alt="Theater" className="object-cover absolute" />
+					<Image priority height={1000} width={3000} src="/Imagem PNG.png" alt="Theater" className="object-cover absolute" />
 				</div>
 				
 
