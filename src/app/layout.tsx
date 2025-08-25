@@ -48,7 +48,7 @@ export default function RootLayout({
 			<body className={`${montserrat.variable} ${roboto.variable} antialiased flex flex-col overflow-x-clip`}>
 
 				<Navigation />
-				<div className="flex dark:brightness-30">
+				<div className="flex dark:brightness-20">
 					<Image priority height={1000} width={3000} src="/Imagem PNG.png" alt="Theater" className="object-cover absolute" />
 				</div>
 

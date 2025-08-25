@@ -20,7 +20,8 @@ export type Movie = {
 export enum Endpoint {
 	WEEKLY_TRENDING_MOVIES = 'trending/movie/week',
 	MOVIE_DETAILS = 'movie',
-	SEARCH_MOVIES = 'search/movie'
+	SEARCH_MOVIES = 'search/movie',
+	MOVIE_GENRES = 'genre/movie/list'
 }
 
 // PaginationInfo - contains pagination metadata

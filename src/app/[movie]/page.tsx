@@ -36,17 +36,17 @@ export default function MovieDetails() {
 	return (
 		<div className="flex flex-col gap-6 w-full">
 
-			<div className="relative rounded-md overflow-clip h-fit w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 p-4 bg-custom-mauve-2">
+			<div className="relative rounded-none sm:rounded-md overflow-clip h-fit w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 p-4 bg-custom-mauve-2">
 
 				{
 					backdropUrl &&
-					<Image src={backdropUrl} alt="Movie Poster" fill className="object-cover brightness-30">
+					<Image src={backdropUrl} alt="Movie Poster" fill className="object-cover brightness-20">
 					</Image>
 				}
 
 				{
 					posterUrl &&
-					<div className="h-140 sm:h-150 w-full relative">
+					<div className="h-140 sm:h-150 md:h-120 lg:h-170 2xl:h-210 w-full relative">
 						<Image src={posterUrl} alt="Movie Backdrop" fill className="rounded-md bg-custom-mauve-2 object-cover" />
 					</div>
 				}
@@ -106,17 +106,15 @@ export default function MovieDetails() {
 					<div className="flex flex-col gap-1 col-span-2 rounded-md h-fit">
 
 						<span className="uppercase font-mont font-semibold text-mauve-11">
-							Percentual
+							Avaliação
 						</span>
-						<span className="text-sm flex gap-2 items-center font-regular sm:font-bold">
-							{movieData?.vote_average.toFixed(2)}
+						<span className="text-sm flex gap-1 items-center font-regular sm:font-bold">
+							{movieData?.vote_average.toFixed(2)}<span className="font-medium">/10</span>
 
 							{movieData &&
 								<Progress value={movieData?.vote_average * 10} />
 							}
 						</span>
-
-
 
 					</div>
 
@@ -186,7 +184,7 @@ export default function MovieDetails() {
 
 			</div>
 
-			<div className="flex flex-col gap-4 h-fit">
+			<div className="flex flex-col gap-4 h-fit p-6 sm:p-0">
 				<span className="text-2xl font-bold">
 					Trailer
 				</span>

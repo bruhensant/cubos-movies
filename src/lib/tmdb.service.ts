@@ -8,7 +8,7 @@ const headers = {
 	Authorization: `Bearer ${TMDB_API_KEY}`,
 };
 
-function getEntites<T>(endpoint: Endpoint, params?: { [key: string]: any }): Promise<T[]> {
+function getEntites<T>(endpoint: Endpoint, params?: { [key: string]: any }): Promise<T> {
 
 	const definedParams = {
 		language: 'pt-BR',
@@ -21,7 +21,7 @@ function getEntites<T>(endpoint: Endpoint, params?: { [key: string]: any }): Pro
 		headers,
 	})
 		.then(res => res.json())
-		.then((data: { results: T[] }) => data.results?.splice(0, 10))
+		.then((data) => data)
 		.catch(err => {
 			console.error(err);
 			return [];

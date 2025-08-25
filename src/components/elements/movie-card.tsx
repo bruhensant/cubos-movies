@@ -21,10 +21,10 @@ export default function MovieCard({ movieData }: { movieData: Movie }) {
 					<div className="opacity-0 bg-background p-4 group-hover:opacity-100 transition-opacity flex flex-col gap-1 col-span-2 rounded-md h-fit">
 
 						<span className="uppercase font-mont font-semibold text-mauve-11">
-							Percentual
+							Avaliação
 						</span>
-						<span className="text-sm flex gap-2 items-center font-regular sm:font-bold">
-							{movieData?.vote_average.toFixed(2)}
+						<span className="text-sm flex gap-1 items-center font-regular sm:font-bold">
+							{movieData?.vote_average.toFixed(2)}<span className="font-medium">/10</span>
 
 							{movieData &&
 								<Progress value={movieData?.vote_average * 10} />
