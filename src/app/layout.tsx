@@ -57,7 +57,7 @@ export default function RootLayout({
 					<Toaster />
 				</main>
 
-				<footer className="flex gap-1 font-mont p-6 pointer-events-none text-mauve-11 text-center border-t items-center justify-center h-20 z-999">
+				<footer className="flex gap-1 font-mont p-6 pointer-events-none text-muted-foreground text-center border-t items-center justify-center h-20 z-999">
 					2023 © Todos os direitos reservados a 
 					<span className="font-medium">
 					Cubos Movies

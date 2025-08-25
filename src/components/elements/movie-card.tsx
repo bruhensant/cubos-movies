@@ -20,7 +20,7 @@ export default function MovieCard({ movieData }: { movieData: Movie }) {
 				<div className="absolute inset-0 group-hover:bg-opacity-100transition-all duration-300 flex items-center justify-center pointer-events-none">
 					<div className="opacity-0 bg-background p-4 group-hover:opacity-100 transition-opacity flex flex-col gap-1 col-span-2 rounded-md h-fit">
 
-						<span className="uppercase font-mont font-semibold text-mauve-11">
+						<span className="uppercase font-mont font-semibold text-muted-foreground">
 							Avaliação
 						</span>
 						<span className="text-sm flex gap-1 items-center font-regular sm:font-bold">

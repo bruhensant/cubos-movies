@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 
 export type Theme = "dark" | "light" | "system"
 
+// useTheme hook para gerenciar o tema
 export function useTheme() {
 	const [theme, setTheme] = useState<Theme>(() => {
 		if (typeof window === "undefined") return "system"
