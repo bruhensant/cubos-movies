@@ -1,11 +1,12 @@
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "../ui/pagination";
 
-export function Paginator() {
+
+export function Paginator({ moveFn, nextPage, previousPage }) {
 	return (
 		<Pagination>
 			<PaginationContent>
 				<PaginationItem>
-					<PaginationPrevious href="#" />
+					<PaginationPrevious onClick={() => moveFn(previousPage)} />
 				</PaginationItem>
 
 				<PaginationItem>
@@ -27,7 +28,7 @@ export function Paginator() {
 				</PaginationItem>
 
 				<PaginationItem>
-					<PaginationNext href="#" />
+					<PaginationNext onClick={() => moveFn(nextPage)} />
 				</PaginationItem>
 
 			</PaginationContent>

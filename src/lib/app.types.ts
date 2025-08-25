@@ -20,6 +20,7 @@ export type Movie = {
 export enum Endpoint {
 	WEEKLY_TRENDING_MOVIES = 'trending/movie/week',
 	MOVIE_DETAILS = 'movie',
+	SEARCH_MOVIES = 'search/movie'
 }
 
 // FullMovie type

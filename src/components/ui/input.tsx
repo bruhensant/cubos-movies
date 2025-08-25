@@ -38,11 +38,6 @@ function SearchInput({ className, type, ...props }: React.ComponentProps<"input"
 				{...props}
 			/>
 
-			<div className="">
-				<Button className=" flex items-center rounded-r-sm justify-center rounded-l-none border border-mauve-6 border-l-0 bg-input h-14 w-14">
-					<Icon width="24" height="24" icon="lets-icons:search-alt-fill"></Icon>
-				</Button>
-			</div>
 		</div>
 	)
 }

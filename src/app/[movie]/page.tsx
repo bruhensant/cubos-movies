@@ -5,6 +5,7 @@ import { getEntity } from "@/lib/tmdb.service";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { formatDate } from "@/lib/utils";
 
 export default function MovieDetails() {
 	const params = useParams();
@@ -19,7 +20,8 @@ export default function MovieDetails() {
 
 	const posterUrl = movieData?.poster_path ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}` : null;
 	const backdropUrl = movieData?.backdrop_path ? `https://image.tmdb.org/t/p/w500${movieData.backdrop_path}` : null;
-	const trailerVideo = movieData?.videos.results.filter(video => video.type === 'Trailer')[0].key;
+	
+	const trailerVideo = movieData?.videos.results.filter(video => video.type === 'Trailer')[0]?.key || undefined;
 
 	return (
 		<div className="flex flex-col gap-6 w-full">
@@ -105,7 +107,7 @@ export default function MovieDetails() {
 							Lançamento
 						</span>
 						<span className="text-sm font-regular sm:font-bold">
-							{movieData?.release_date}
+							{formatDate(movieData?.release_date)}
 						</span>
 					</div>
 
@@ -171,7 +173,16 @@ export default function MovieDetails() {
 					Trailer
 				</span>
 
-				<iframe className="w-full aspect-video rounded-md" src={"https://www.youtube.com/embed/" + trailerVideo} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+				{
+					trailerVideo ? (
+						<iframe className="w-full aspect-video rounded-md" src={"https://www.youtube.com/embed/" + trailerVideo} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+					) : (
+						<div className="w-full aspect-video border-dashed rounded-md flex items-center justify-center border bg-custom-mauve-2">
+							<p className="text-lg uppercase text-mauve-11">No trailer available yet.</p>
+						</div>
+					)
+				}
+
 			</div>
 		</div>
 	);

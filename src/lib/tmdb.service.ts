@@ -16,13 +16,12 @@ function getEntites<T>(endpoint: Endpoint, params?: { [key: string]: any }): Pro
 		...params
 	}
 
-
 	return fetch(`${API_URL}${endpoint}${`?${new URLSearchParams(definedParams)}`}`, {
 		method: 'GET',
 		headers,
 	})
 		.then(res => res.json())
-		.then((data: { results: T[] }) => data.results.splice(0, 10))
+		.then((data: { results: T[] }) => data.results?.splice(0, 10))
 		.catch(err => {
 			console.error(err);
 			return [];
