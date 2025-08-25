@@ -27,7 +27,7 @@ export default function MovieDetails() {
 
 				{
 					backdropUrl &&
-					<Image src={backdropUrl} quality={100} alt="Movie Poster" fill objectFit="cover">
+					<Image src={backdropUrl} alt="Movie Poster" fill objectFit="cover">
 					</Image>
 				}
 

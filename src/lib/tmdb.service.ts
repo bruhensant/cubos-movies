@@ -12,6 +12,7 @@ function getEntites<T>(endpoint: Endpoint, params?: { [key: string]: any }): Pro
 
 	const definedParams = {
 		language: 'pt-BR',
+		append_to_response: 'videos',
 		...params
 	}
 
@@ -29,7 +30,7 @@ function getEntites<T>(endpoint: Endpoint, params?: { [key: string]: any }): Pro
 };
 
 function getEntity<T>(endpoint: Endpoint, id: number): Promise<T> {
-	return fetch(`${API_URL}${endpoint}/${id}?language=pt-BR`, {
+	return fetch(`${API_URL}${endpoint}/${id}?language=pt-BR&append_to_response=videos`, {
 		method: 'GET',
 		headers,
 	})
