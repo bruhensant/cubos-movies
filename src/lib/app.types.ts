@@ -17,11 +17,11 @@ export type Movie = {
 	vote_count: number;
 }
 
-
 export enum Endpoint {
 	WEEKLY_TRENDING_MOVIES = 'trending/movie/week',
 	MOVIE_DETAILS = 'movie',
 }
+
 // FullMovie type
 export type FullMovie = {
   adult: boolean

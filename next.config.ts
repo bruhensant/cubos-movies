@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    remotePatterns: [new URL('http://image.tmdb.org/**')],
+    remotePatterns: [new URL('https://image.tmdb.org/**')],
   },
 };
 

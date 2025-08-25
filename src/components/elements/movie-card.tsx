@@ -11,7 +11,7 @@ export default function MovieCard({ movieData }: { movieData: Movie }) {
 	return (
 		<Link href={`${movieData.id}`}>
 			<Card
-				className="flex relative overflow-clip bg-cover bg-center bg-no-repeat h-84 2xl:h-120"
+				className="flex relative overflow-clip bg-cover bg-center bg-no-repeat h-64 sm:h-84 2xl:h-120"
 				style={{
 					backgroundImage: posterUrl ? `url(${posterUrl})` : 'none'
 				}}>

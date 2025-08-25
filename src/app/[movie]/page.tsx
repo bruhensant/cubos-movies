@@ -4,11 +4,11 @@ import { Endpoint, FullMovie } from "@/lib/app.types";
 import { getEntity } from "@/lib/tmdb.service";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function MovieDetails() {
 	const params = useParams();
 	const movieId = Number(params.movie);
-
 	const [movieData, setMovieData] = useState<FullMovie | null>(null);
 
 	useEffect(() => {
@@ -17,118 +17,149 @@ export default function MovieDetails() {
 		})
 	}, []);
 
-	// const posterUrl = movieData.poster_path ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}` : '';
+	const posterUrl = movieData?.poster_path ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}` : null;
+	const backdropUrl = movieData?.backdrop_path ? `https://image.tmdb.org/t/p/w500${movieData.backdrop_path}` : null;
 
 	return (
 		<div className="flex flex-col gap-6 w-full">
 
-			<div className="relative rounded-md w-full p-6 grid grid-cols-5 gap-6 bg-white">
+			<div className="relative rounded-md h-fit w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 p-4 bg-custom-mauve-2">
 
-				<div className="rounded-md p-6 col-span-1 h-100 bg-custom-mauve-2 backdrop-blur-xs">
-					{movieData?.id}
+				{
+					backdropUrl &&
+					<Image src={backdropUrl} quality={100} alt="Movie Poster" fill objectFit="cover">
+					</Image>
+				}
+
+				{
+					posterUrl &&
+					<div className="h-140 sm:h-150 w-full relative">
+						<Image src={posterUrl} alt="Movie Poster" fill objectFit="cover" className="rounded-md bg-custom-mauve-2" />
+					</div>
+				}
+
+				<div className="flex flex-col gap-4 relative">
+					<div className="flex flex-col gap-2">
+						<span className="text-2xl font-semibold">{movieData?.title}</span>
+						<span className="text-sm text-mauve-11">Título original: {movieData?.original_title}</span>
+					</div>
+
+					<span className="font-xs italic">{movieData?.tagline}</span>
+
+
+					<div className="flex flex-col gap-2 rounded-md p-4 bg-custom-mauve-2 backdrop-blur-xs">
+						<span className="font-mont font-bold uppercase text-mauve-11">
+							Sinópse
+						</span>
+
+						<span>
+							{movieData?.overview}
+						</span>
+					</div>
+
+					<span className="flex flex-col gap-2 rounded-md p-4 bg-custom-mauve-2 backdrop-blur-xs">
+						<span className="font-mont font-bold uppercase text-mauve-11">
+							Gêneros
+						</span>
+						<div className="flex flex-wrap gap-4">
+							{movieData?.genres.map(genre => (
+								<span key={genre.id} className="rounded py-2 px-3 bg-purple-4 font-regular uppercase font-mont">
+									{genre.name}
+								</span>
+							))}
+						</div>
+					</span>
 				</div>
 
-				<div className="flex flex-col col-span-2 rounded-md bg-custom-mauve-2 backdrop-blur-xs">
-					{movieData?.title}
+				<div className="grid grid-cols-6 gap-4 *:bg-custom-mauve-2 h-fit *:backdrop-blur-xs text-xs *:p-4">
 
-					<span>Título original: {movieData?.original_title}</span>
-					<span>{movieData?.tagline}</span>
-					<span>sinopse: {movieData?.overview}</span>
-					<span>gêneros: {movieData?.genres.map(genre => genre.name).join(", ")}</span>
-				</div>
-
-				<div className="col-span-2 grid grid-cols-6 gap-6 *:bg-custom-mauve-2 *:backdrop-blur-xs">
-					<div className="flex flex-col gap-1 col-span-2 rounded-md p-6">
-						<span className="uppercase font-mont font-semibold text-md">
+					<div className="flex flex-col gap-1 col-span-2 rounded-md h-fit">
+						<span className="uppercase font-mont font-semibold text-md text-mauve-11">
 							Popularidade
 						</span>
-						<span className="font-bold text-md">
-						{movieData?.popularity}
-
+						<span className="text-sm font-regular sm:font-bold">
+							{movieData?.popularity}
 						</span>
 					</div>
-					<div className="flex flex-col gap-1 col-span-2 rounded-md p-6">
-						<span className="uppercase font-mont font-semibold text-md">
+
+					<div className="flex flex-col gap-1 col-span-2 rounded-md h-fit">
+						<span className="uppercase font-mont font-semibold text-mauve-11">
 							Votos
 						</span>
-						<span className="font-bold text-md">
-						{movieData?.vote_count}
-
+						<span className="text-sm font-regular sm:font-bold">
+							{movieData?.vote_count}
 						</span>
 					</div>
-					<div className="flex flex-col gap-1 col-span-2 rounded-md p-6">
-						<span className="uppercase font-mont font-semibold text-md">
+
+					<div className="flex flex-col gap-1 col-span-2 rounded-md h-fit">
+						<span className="uppercase font-mont font-semibold text-mauve-11">
 							Percentual
 						</span>
-						<span className="font-bold text-md">
-						{movieData?.vote_average}
-
+						<span className="text-sm font-regular sm:font-bold">
+							{movieData?.vote_average}
 						</span>
 					</div>
 
-					<div className="flex flex-col gap-1 col-span-3 rounded-md p-6">
-						<span className="uppercase font-mont font-semibold text-md">
+					<div className="flex flex-col gap-1 col-span-3 rounded-md h-fit">
+						<span className="uppercase font-mont font-semibold text-mauve-11">
 							Lançamento
 						</span>
-						<span className="font-bold text-md">
-						{movieData?.release_date}
-
+						<span className="text-sm font-regular sm:font-bold">
+							{movieData?.release_date}
 						</span>
 					</div>
-					<div className="flex flex-col gap-1 col-span-3 rounded-md p-6">
-						<span className="uppercase font-mont font-semibold text-md">
+
+					<div className="flex flex-col gap-1 col-span-3 rounded-md h-fit">
+						<span className="uppercase font-mont font-semibold text-mauve-11">
 							Duração
 						</span>
-						<span className="font-bold text-md">
-						{movieData?.runtime}
-
+						<span className="text-sm font-regular sm:font-bold">
+							{movieData?.runtime}
 						</span>
 					</div>
 
-					<div className="flex flex-col gap-1 col-span-3 rounded-md p-6">
-						<span className="uppercase font-mont font-semibold text-md">
+					<div className="flex flex-col gap-1 col-span-3 rounded-md h-fit">
+						<span className="uppercase font-mont font-semibold text-mauve-11">
 							Situação
 						</span>
-						<span className="font-bold text-md">
-						{movieData?.status}
-
+						<span className="text-sm font-regular sm:font-bold">
+							{movieData?.status}
 						</span>
 					</div>
-					<div className="flex flex-col gap-1 col-span-3 rounded-md p-6">
-						<span className="uppercase font-mont font-semibold text-md">
+
+					<div className="flex flex-col gap-1 col-span-3 rounded-md h-fit">
+						<span className="uppercase font-mont font-semibold text-mauve-11">
 							Idioma
 						</span>
-						<span className="font-bold text-md">
-						{movieData?.original_language}
-
+						<span className="text-sm font-regular sm:font-bold">
+							{movieData?.original_language}
 						</span>
 					</div>
 
-					<div className="flex flex-col gap-1 col-span-2 rounded-md p-6">
-						<span className="uppercase font-mont font-semibold text-md">
+					<div className="flex flex-col gap-1 col-span-2 rounded-md h-fit">
+						<span className="uppercase font-mont font-semibold text-mauve-11">
 							Orçamento
 						</span>
-						<span className="font-bold text-md">
-						{movieData?.budget}
-
+						<span className="text-sm font-regular sm:font-bold">
+							{movieData?.budget}
 						</span>
 					</div>
-					<div className="flex flex-col gap-1 col-span-2 rounded-md p-6">
-						<span className="uppercase font-mont font-semibold text-md">
+
+					<div className="flex flex-col gap-1 col-span-2 rounded-md h-fit">
+						<span className="uppercase font-mont font-semibold text-mauve-11">
 							Receita
 						</span>
-						<span className="font-bold text-md">
-						{movieData?.revenue}
-
+						<span className="text-sm font-regular sm:font-bold">
+							{movieData?.revenue}
 						</span>
 					</div>
-					<div className="flex flex-col gap-1 col-span-2 rounded-md p-6">
-						<span className="uppercase font-mont font-semibold text-md">
+
+					<div className="flex flex-col gap-1 col-span-2 rounded-md h-fit">
+						<span className="uppercase font-mont font-semibold text-mauve-11">
 							Lucro
 						</span>
-						<span className="font-bold text-md">
-						{Number(movieData?.revenue) - Number(movieData?.budget)}
-
+						<span className="text-sm font-regular sm:font-bold">
+							{String(Number(movieData?.revenue) - Number(movieData?.budget))}
 						</span>
 					</div>
 				</div>
@@ -140,7 +171,7 @@ export default function MovieDetails() {
 					Trailer
 				</span>
 
-				<div className="rounded-sm border p-6 gap-4">
+				<div className="rounded-sm border p-4 gap-4">
 					video
 				</div>
 			</div>
