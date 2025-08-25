@@ -46,13 +46,13 @@ export function SearchBox({ searchFn, setMovies }: { searchFn: (query: string) =
 
 					{!filterContainerState &&
 
-						<Button className=" flex items-center rounded-r-sm justify-center rounded-l-none border border-mauve-6 border-l-0 bg-input h-14 w-14" onClick={() => searchFn(filterInputState)}>
+						<Button className=" flex items-center rounded-r-sm justify-center rounded-l-none border border-mauve-6 border-l-0 h-14 w-14" onClick={() => searchFn(filterInputState)}>
 							<Icon icon="lets-icons:search-alt-fill" />
 						</Button>
 					}
 				</div>
 
-				<Button variant={'secondary'} className="h-14" onClick={() => setFilterContainerState(!filterContainerState)}>
+				<Button variant={'secondary'} className="h-14 text-title" onClick={() => setFilterContainerState(!filterContainerState)}>
 					<Icon icon="lets-icons:filter" />
 				</Button>
 

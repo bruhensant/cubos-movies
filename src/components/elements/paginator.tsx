@@ -40,7 +40,7 @@ export function Paginator({ currentPage, totalPages, onPageChange }: PaginatorPr
 	const visiblePages = getVisiblePages();
 
 	return (
-		<Pagination className="mt-auto">
+		<Pagination className="mt-2 sm:mt-8">
 			<PaginationContent>
 				<PaginationItem>
 					<PaginationPrevious

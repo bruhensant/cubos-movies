@@ -17,13 +17,13 @@ export default function MovieCard({ movieData }: { movieData: Movie }) {
 					backgroundImage: posterUrl ? `url(${posterUrl})` : 'none'
 				}}>
 
-				<div className="absolute inset-0 group-hover:bg-opacity-100transition-all duration-300 flex items-center justify-center pointer-events-none">
-					<div className="opacity-0 bg-background p-4 group-hover:opacity-100 transition-opacity flex flex-col gap-1 col-span-2 rounded-md h-fit">
+				<div className="absolute inset-0 group-hover:bg-opacity-100 transition-all duration-300 flex items-center justify-center pointer-events-none">
+					<div className="opacity-0 bg-container backdrop-blur-xs p-4 group-hover:opacity-100 transition-opacity flex flex-col gap-1 col-span-2 rounded-md h-fit">
 
-						<span className="uppercase font-mont font-semibold text-muted-foreground">
+						<span className="uppercase font-mont font-semibold text-title">
 							Avaliação
 						</span>
-						<span className="text-sm flex gap-1 items-center font-regular sm:font-bold">
+						<span className="text-sm text-content flex gap-1 items-center font-regular sm:font-bold">
 							{movieData?.vote_average?.toFixed(2)}<span className="font-medium">/10</span>
 
 							{movieData &&
