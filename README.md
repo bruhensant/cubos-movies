@@ -40,5 +40,4 @@ A aplicação deve estar disponível através da porta 3000, acessível pela URL
 # TODO
 
 - [ ] Corrigir tema de modo claro;
-- [ ] Corrigir backdrop de fundo;
 - [ ] Verificar viabilidade de filtros compostos;
