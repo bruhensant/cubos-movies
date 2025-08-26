@@ -28,7 +28,7 @@ export function Navigation() {
 
 			<div className="flex gap-12 items-center">
 				<div className="dark:hidden hidden sm:flex border rounded-md px-3 py-2 border-muted-foreground text-muted-foreground">
-					Light mode under development 😅
+					Light mode WIP 😅
 				</div>
 
 				<NavigationMenuItem>
