@@ -24,20 +24,28 @@ export function Navigation() {
 			</NavigationMenuLink>
 
 
-			<NavigationMenuItem>
-				<Button 
-					variant={"secondary"} 
-					onClick={toggleTheme} 
-					disabled={!mounted}
-					className="min-w-10 min-h-10"
-				>
-					{mounted ? (
-						<Icon icon={isDark ? "lets-icons:sun" : "lets-icons:moon"} />
-					) : (
-						<Icon icon="lets-icons:moon" className="opacity-50" />
-					)}
-				</Button>
-			</NavigationMenuItem>
+
+
+			<div className="flex gap-12 items-center">
+				<div className="dark:hidden hidden sm:flex border rounded-md px-3 py-2 border-muted-foreground text-muted-foreground">
+					Light mode under development 😅
+				</div>
+
+				<NavigationMenuItem>
+					<Button
+						variant={"secondary"}
+						onClick={toggleTheme}
+						disabled={!mounted}
+						className="min-w-10 min-h-10"
+					>
+						{mounted ? (
+							<Icon icon={isDark ? "lets-icons:sun" : "lets-icons:moon"} />
+						) : (
+							<Icon icon="lets-icons:moon" className="opacity-50" />
+						)}
+					</Button>
+				</NavigationMenuItem>
+			</div>
 		</NavigationMenu >
 	)
 }

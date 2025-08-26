@@ -60,10 +60,10 @@ export function SearchBox({ searchFn, setMovies }: { searchFn: (query: string) =
 
 			{
 				filterContainerState &&
-				<div className="border flex flex-col gap-4 transition-all rounded-md bg-background backdrop-blur-xs p-6">
+				<div className="border flex flex-col gap-4 transition-all rounded-md bg-container backdrop-blur-xs p-6">
 					<div className="gap-2 grid grid-cols-6">
 						{genreList?.map(genre => (
-							<div key={genre.id} className="flex items-center gap-2">
+							<div key={genre.id} className="flex items-center gap-2 text-content">
 								<Checkbox id={`genre-${genre.id}`} value={genre.id} onCheckedChange={(checked) => {
 									if (checked) {
 										setSelectedGenreList((prev) => [...prev, genre.id]);

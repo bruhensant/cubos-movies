@@ -188,7 +188,7 @@ export default function MovieDetails() {
 			</div>
 
 			<div className="flex flex-col gap-4 h-fit p-6 sm:p-0">
-				<span className="text-2xl text-title font-bold">
+				<span className="text-2xl dark:text-title-background  font-bold">
 					Trailer
 				</span>
 
